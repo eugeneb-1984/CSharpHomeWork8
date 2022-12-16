@@ -12,11 +12,10 @@
 
 /*
 Алгоритм сортировки массива:
-1. Запомни число с позицией n
+1. Запомни позицию числа n
 2. Найди мин(макс) число в массиве
 3. Поменяй числа из п.2 и п.1 местами
-4. Перейди к следующей позиции.
-5. Повтори п. 1-4.
+4. Повтори п. 1-3 для оставшихся позиций
 */
 
 //Принимаем число на ввод
@@ -63,15 +62,14 @@ void PrintArray (int [,] array) {
 //сортируем строки массива по убыванию
 void SortArrayRowsDesc(int [,] array) {
     for (int row = 0; row < array.GetLength(0); row++) {
-        for (int col = 0; col < array.GetLength(1); col++) {
-        int maxPos = col;
-        for (int i = col + 1; i < array.GetLength(1); i++)
-        {
-            if (array[row,i] > array[row, maxPos]) maxPos = i;
-        }
-        int temp = array[row, col];
-        array[row, col] = array[row, maxPos];
-        array [row, maxPos] = temp;
+        for (int col = 0; col < array.GetLength(1); col++) { // повтори п. 1-3
+            int maxPos = col; //запомни позицию
+            for (int i = col + 1; i < array.GetLength(1); i++) { //найди макс число
+                if (array[row,i] > array[row, maxPos]) maxPos = i; 
+            }
+            int temp = array[row, col];
+            array[row, col] = array[row, maxPos];
+            array [row, maxPos] = temp;
         }
     }
 }

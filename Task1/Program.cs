@@ -63,17 +63,16 @@ void PrintArray (int [,] array) {
 void SortArrayRowsDesc(int [,] array) {
     for (int row = 0; row < array.GetLength(0); row++) {
         for (int col = 0; col < array.GetLength(1); col++) { // повтори п. 1-3
-            int maxPos = col; //запомни позицию
-            for (int i = col + 1; i < array.GetLength(1); i++) { //найди макс число
+            int maxPos = col; // (1) запомни позицию
+            for (int i = col + 1; i < array.GetLength(1); i++) { // (2) найди макс число
                 if (array[row,i] > array[row, maxPos]) maxPos = i; 
             }
-            int temp = array[row, col];
-            array[row, col] = array[row, maxPos];
-            array [row, maxPos] = temp;
+            int temp = array[row, col]; // (3) Поменяй числа местами
+            array[row, col] = array[row, maxPos]; // (3) Поменяй числа местами
+            array [row, maxPos] = temp; // (3) Поменяй числа местами
         }
     }
 }
-
 
 int row = GetNumber("Сколько строк? ");
 int col = GetNumber("Сколько столбцов?" );

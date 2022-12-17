@@ -126,7 +126,7 @@ int MultiplyLines(int [] row, int [] col) {
 Random rnd = new Random();
 int col1 = GetNumber("Сколько столбцов нужно в матрице 1? ");
 int row2 = GetNumber("Сколько строк нужно в матрице 2? ");
-int [,] matrix1 = InitMatrix(rnd.Next(2,5), col1); 
+int [,] matrix1 = InitMatrix(rnd.Next(2,5), col1);
 int [,] matrix2 = InitMatrix(row2, rnd.Next(2,5));
 
 // Печатаем заданные матрицы:a

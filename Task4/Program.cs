@@ -27,13 +27,17 @@ int GetNumber(string message) {
 //создаём трёхмерный массив из неповторяющихся двузначных чисел с заданным кол-вом элементов.
 int [,,] InitRandArray(int w, int h, int d) {
     int [,,] randArray = new int [w, h, d];
+    Random rnd = new Random();
     for (int i = 0; i < w; i++) {
         for (int j = 0; j < h; j++) {
             for (int k = 0; k < d; k++) {
-                randArray[i, j, k] = GetUniqueNumberInArray(randArray);
-                while (randArray[i, j, k] == -1) {
-                    randArray[i, j, k]  = GetUniqueNumberInArray(randArray);
+                int newNumber = 0;
+                do {
+                    newNumber = rnd.Next(10,99);
+                    //Console.WriteLine($"Сгенерили номер {newNumber}, проверяем...");
                 }
+                while(CheckIfNumberExistsInArray(randArray, newNumber));
+                randArray[i,j,k] = newNumber;
                 //Console.WriteLine($"Номер {randArray[i,j,k]} записан в позицию: ({i}, {j}, {k})");
             }
         }      
@@ -42,23 +46,20 @@ int [,,] InitRandArray(int w, int h, int d) {
 }
 
 //получаем уникальный номер массива
-int GetUniqueNumberInArray (int [,,] array) {
-    Random rnd = new Random();
-    int newNumber = rnd.Next(10,99);
-    //Console.WriteLine($"Сгенерили номер {newNumber}, проверяем...");
+bool CheckIfNumberExistsInArray (int [,,] array, int number) {
     for (int w = 0; w < array.GetLength(0); w++) {
         for(int h = 0; h < array.GetLength(1); h++) {
             for (int d = 0; d < array.GetLength(2); d++) {
                 //Console.WriteLine($"Смотрим позицию {w}, {h}, {d}");
-                if (array[w, h, d] == newNumber) {
-                    //Console.WriteLine($"Номер {newNumber} уже есть в позиции ({w}, {h}, {d})");
-                    return -1;
+                if (array[w, h, d] == number) {
+                    //Console.WriteLine($"Номер {number} уже есть в позиции ({w}, {h}, {d})");
+                    return true;
                 }                    
             }
         }
     }
-    //Console.WriteLine($"Номер {newNumber} подходит, возвращаем...");
-    return newNumber;
+    //Console.WriteLine($"Номер {number} отсутствует в массиве.");
+    return false;
 }
 
 //выводим значения массива
